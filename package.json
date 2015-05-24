@@ -4,8 +4,10 @@
   "author": "@nthitz",
   "license": "MIT License",
   "devDependencies": {
+    "d3": "^3.5.5",
     "gulp": "^3.8.11",
     "gulp-babel": "^5.1.0",
-    "gulp-plumber": "^1.0.1"
+    "gulp-plumber": "^1.0.1",
+    "lodash": "^3.9.2"
   }
 }
