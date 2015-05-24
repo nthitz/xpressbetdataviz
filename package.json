@@ -2,5 +2,10 @@
   "name": "xpressbetdataviz",
   "version": "0.0.1",
   "author": "@nthitz",
-  "license": "MIT License"
+  "license": "MIT License",
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-babel": "^5.1.0",
+    "gulp-plumber": "^1.0.1"
+  }
 }

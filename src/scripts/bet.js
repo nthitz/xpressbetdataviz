@@ -21,8 +21,8 @@ function createDataDictionary(data, keys) {
   })
 }
 
-d3.csv('xbstatement.csv', function(err, data) {
-  var bets = _.filter(data, _.matches({ key.transactionType: 'Bet'}))
+d3.csv('data/xbstatement.csv', function(err, data) {
+  var bets = _.filter(data, _.matches( { [key.transactionType]: 'Bet' } ))
   var dd = createDataDictionary(data, keys);
   console.log(dd)
 
