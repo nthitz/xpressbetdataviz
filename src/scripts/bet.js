@@ -88,6 +88,14 @@ function and(a,b) {
     return a(value, key) && b(value, key)
   }
 }
+/**
+* Functional Not
+*/
+function not(a) {
+  return function(value, key) {
+    return ! a(value,key)
+  }
+}
 function init() {
   keys = prepareKeys(keys);
   console.log(keys)
@@ -96,12 +104,10 @@ function init() {
 
     //find rows that have bet types of Bet and have a non empty Cost value
     var bets = _.filter(data, and(
-      _.matches( { [keys.transactionType.key]: 'Bet' } ),
-      function(datum) {
-        return datum[keys.cost.key] !== ''
-      })
+        _.matches( { [keys.transactionType.key]: 'Bet' } )
+        not(_.matches( { [keys.cost.key]: 0 } ))
+      )
     )
-    console.log(bets)
 
     var dd = createDataDictionary(bets, keys);
     console.log(dd)
