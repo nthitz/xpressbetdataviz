@@ -79,14 +79,33 @@ function createDataDictionary(data, keys) {
   })
 }
 
+/**
+* Functional And
+* Returns a function that performs an `and` operation the two provided functions
+*/
+function and(a,b) {
+  return function(value, key) {
+    return a(value, key) && b(value, key)
+  }
+}
 function init() {
   keys = prepareKeys(keys);
   console.log(keys)
   d3.csv('data/xbstatement.csv', function(err, data) {
     preprocessRows(data)
-    var bets = _.filter(data, _.matches( { [keys.transactionType]: 'Bet' } ))
-    var dd = createDataDictionary(data, keys);
+
+    //find rows that have bet types of Bet and have a non empty Cost value
+    var bets = _.filter(data, and(
+      _.matches( { [keys.transactionType.key]: 'Bet' } ),
+      function(datum) {
+        return datum[keys.cost.key] !== ''
+      })
+    )
+    console.log(bets)
+
+    var dd = createDataDictionary(bets, keys);
     console.log(dd)
+    console.log(_.filter(bets, function(d) { return d[keys.betType.key] === '' }))
 
   })
 }
