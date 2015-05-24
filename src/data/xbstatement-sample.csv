@@ -1,0 +1,9 @@
+Date/Time(PT),TransactionType,Txn#,Track,Race,Pool,Stake,Selection,Debit,Credit
+2015-04-19 13:26,Bet (Cancelled),218544,Golden Gate Fields,4,P6,$0.20, 3+8 / 2+6 / 2+8 / 4+6 / 5+11 / 3+8,$12.80,$12.80
+2015-04-19 13:04,Bet,156971,Golden Gate Fields,2,WPS,, 9,$6.00,$0.00
+2015-04-19 13:03,Bet,,14- Requested Bet Amount Is Not Allowed,,,,,,
+2015-04-19 12:58,Bet,786378,Golden Gate Fields,2,EX,, 1+9,$2.00,$0.00
+2015-04-19 12:36,Bet,405887,Golden Gate Fields,1,SH,, 3,$2.00,$2.10
+2015-04-19 12:28,Bet,825193,Golden Gate Fields,1,EX,, 2+3,$2.00,$0.00
+2015-04-19 12:26,Bet,299408,Golden Gate Fields,1,P5,, 3 / 9 / 2 / 3 / 6,$0.50,$0.00
+2015-04-19 12:19,ACH Deposit,,,,,, ,,$40.00
