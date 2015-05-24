@@ -1,8 +1,18 @@
+var formatters = require('./formatters')
 // map of our data keys, useful names as keys, the verbose actual data keys as the values of the object
 var keys = {
-  'payout': 'Credit',
-  'cost': 'Debit',
-  'time': 'Date/Time(PT)',
+  'payout': {
+    key: 'Credit',
+    formatter: formatters.dollar
+  },
+  'cost': {
+    key: 'Debit',
+    formatter: formatters.dollar
+  },
+  'time': {
+    key: 'Date/Time(PT)',
+    formatter: formatters.time
+  },
   'betType': 'Pool',
   'raceNumber': 'Race',
   'selection': 'Selection',
@@ -10,6 +20,16 @@ var keys = {
   'id': 'Txn#',
   'track': 'Track',
   'stake': 'Stake'
+}
+
+function prepareKeys(keys) {
+  return _.mapValues(keys, function(dataKey, keyKey) {
+    if( _.isString(dataKey)) {
+      return { key: dataKey }
+    } else if(_.isPlainObject(dataKey)) {
+      return dataKey
+    }
+  })
 }
 
 /**
@@ -21,9 +41,15 @@ function createDataDictionary(data, keys) {
   })
 }
 
-d3.csv('data/xbstatement.csv', function(err, data) {
-  var bets = _.filter(data, _.matches( { [key.transactionType]: 'Bet' } ))
-  var dd = createDataDictionary(data, keys);
-  console.log(dd)
+function init() {
+  keys = prepareKeys(keys);
+  console.log(keys)
+  d3.csv('data/xbstatement.csv', function(err, data) {
+    var bets = _.filter(data, _.matches( { [keys.transactionType]: 'Bet' } ))
+    var dd = createDataDictionary(data, keys);
+    console.log(dd)
 
-})
+  })
+}
+
+init();
