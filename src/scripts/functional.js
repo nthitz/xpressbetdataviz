@@ -6,7 +6,7 @@
 */
 function and(a,b) {
   return function() {
-    return a(arguments) && b(arguments)
+    return a.apply(this,arguments) && b.apply(this, arguments)
   }
 }
 

@@ -56,19 +56,20 @@ function init() {
   console.log(keys)
   d3.csv('data/xbstatement.csv', function(err, data) {
     preprocessRows(data)
-
     //find rows that have bet types of Bet and have a non empty Cost value
-    var bets = _.filter(data, and(
+    var bets = _.filter(data,
+      and(
         _.matches( { [keys.transactionType.key]: 'Bet' } ),
         not(_.matches( { [keys.cost.key]: 0 } ))
       )
     )
+
     console.log("filtered rows: " + bets.length + " of " + data.length)
 
     var dd = createDataDictionary(bets, keys);
     console.log(dd)
 
-    dccrossfilterviz(data, dd, '.dccrossfilterviz')
+    dccrossfilterviz(bets, dd, '.dccrossfilterviz')
   })
 }
 
