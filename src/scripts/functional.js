@@ -18,7 +18,7 @@ function and(a,b) {
 */
 function and(a,b) {
   return function() {
-    return a(arguments) || b(arguments)
+    return a.apply(this,arguments) || b.apply(this, arguments)
   }
 }
 
@@ -30,7 +30,7 @@ function and(a,b) {
 */
 function not(a) {
   return function() {
-    return ! a(arguments)
+    return ! a.apply(this, arguments)
   }
 }
 
