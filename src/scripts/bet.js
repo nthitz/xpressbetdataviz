@@ -10,15 +10,6 @@ var functional = require('./functional'),
 
 var keys = require('./keys')
 
-function prepareKeys(keys) {
-  return _.mapValues(keys, function(key, keyKey) {
-    if( _.isString(key)) {
-      return { key: key }
-    } else if(_.isPlainObject(key)) {
-      return key
-    }
-  })
-}
 function preprocessRows(data) {
   // apply a transformation to each row in our dataset
   return _.map(data, function(datum) {
@@ -62,7 +53,6 @@ function createDataDictionary(data, keys) {
 
 
 function init() {
-  keys = prepareKeys(keys);
   console.log(keys)
   d3.csv('data/xbstatement.csv', function(err, data) {
     preprocessRows(data)

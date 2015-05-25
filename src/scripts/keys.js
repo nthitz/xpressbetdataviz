@@ -36,4 +36,16 @@ var keys = {
   'stake': 'Stake'
 }
 
+
+function prepareKeys(keys) {
+  return _.mapValues(keys, function(key, keyKey) {
+    if( _.isString(key)) {
+      return { key: key }
+    } else if(_.isPlainObject(key)) {
+      return key
+    }
+  })
+}
+keys = prepareKeys(keys)
+
 module.exports = keys
