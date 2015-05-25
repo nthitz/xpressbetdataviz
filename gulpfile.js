@@ -5,6 +5,7 @@ var gulp = require('gulp'),
   plumber = require('gulp-plumber'),
   jade = require('gulp-jade'),
   webpack = require('gulp-webpack'),
+  notify = require('gulp-notify'),
 
 path = {
   src: {
@@ -38,7 +39,9 @@ gulp.task('webpack', ['6to5'], function() {
 })
 gulp.task('6to5', function() {
   gulp.src(path.src.js)
-    .pipe(plumber())
+    .pipe(plumber({
+      errorHandler: notify.onError("Error: <%= error.message %>")
+    }))
     .pipe(babel())
     .pipe(plumber.stop())
     .pipe(gulp.dest(path.dist.js));
