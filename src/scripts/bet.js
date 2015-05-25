@@ -67,8 +67,8 @@ function init() {
 
     var dd = createDataDictionary(bets, keys);
     console.log(dd)
-    console.log(_.filter(bets, function(d) { return d[keys.betType.key] === '' }))
 
+    dccrossfilterviz(data, keys)
   })
 }
 

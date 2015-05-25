@@ -1,19 +1,23 @@
 var crossfilter = require('crossfilter'),
   dc = require('dc')
+  d3 = require('d3')
   ;
-var exports = {}
 var dataArray,
+  selector,
   data,
   all
 
   ;
-function init(_dataArray) {
+function viz(_dataArray, _selector) {
   dataArray = _dataArray;
+  selector = _selector;
   data = crossfilter(dataArray)
   all = data.groupAll()
 
 
+
+
 }
 
-exports.init = init
-module.exports = exports
+
+module.exports = viz
