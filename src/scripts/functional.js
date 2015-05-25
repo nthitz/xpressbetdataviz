@@ -1,25 +1,43 @@
 /**
 * Functional And
-* Returns a function that performs an `and` operation the two provided functions
+* @param {function} a - the first function to call as part of the and
+* @param {function} b - the second function to call..
+* @return {function} a function that returns a() && b(). a & b are called with the same arguments as passed to this returned function.
 */
 function and(a,b) {
-  return function(value, key) {
-    return a(value, key) && b(value, key)
+  return function() {
+    return a(arguments) && b(arguments)
   }
 }
+
+/**
+* Functional Or
+* @param {function} a - the first function to call as part of the or
+* @param {function} b - the second function to call..
+* @return {function} a function that returns a() || b(). a & b are called with the same arguments as passed to this returned function.
+*/
+function and(a,b) {
+  return function() {
+    return a(arguments) || b(arguments)
+  }
+}
+
+
 /**
 * Functional Not
-* returns a function that returns the opposite (logical not) of the provided function
+* @param {function} a - function to call as part of the not
+* @return {function} a function that returns the logical not of a call to a(). a is called with the same arguments as passed to this returned function.
 */
 function not(a) {
-  return function(value, key) {
-    return ! a(value,key)
+  return function() {
+    return ! a(arguments)
   }
 }
 
 /**
 * Functional existential
-* returns a function that checks if a given property exists
+* @param {function} key - the key to check existance for
+* @return {function} a function that returns true if the property key exists in it's first argument.
 */
 function exists(key) {
   return function(object) {
