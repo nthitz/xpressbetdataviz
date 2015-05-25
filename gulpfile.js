@@ -12,13 +12,15 @@ path = {
     js: 'src/scripts/**/*.js',
     views: 'src/views/*.jade',
     data: 'src/data/**/*.*',
-    webpack: 'dist/scripts/bet.js'
+    webpack: 'dist/scripts/bet.js',
+    vendorStyles: ['node_modules/dc/dc.css']
   },
   dist: {
     js: 'dist/scripts/',
     views: 'dist/',
     data: 'dist/data/',
-    webpack: 'dist/scripts/'
+    webpack: 'dist/scripts/',
+    vendorStyles: 'dist/vendorStyles/'
   }
 };
 
@@ -51,10 +53,17 @@ gulp.task('data', function() {
   gulp.src(path.src.data)
     .pipe(gulp.dest(path.dist.data))
 })
-gulp.task('watch', ['webpack', 'views', 'data'], function() {
+
+gulp.task('vendorStyles', function() {
+  gulp.src(path.src.vendorStyles)
+    .pipe(gulp.dest(path.dist.vendorStyles))
+})
+gulp.task('watch', ['webpack', 'views', 'data', 'vendorStyles'], function() {
   gulp.watch(path.src.js, ['webpack']);
   gulp.watch(path.src.views, ['views']);
   gulp.watch(path.src.data, ['data']);
+  gulp.watch(path.src.vendorStyles, ['vendorStyles']);
+
 });
 
 gulp.task('default', ['watch']);

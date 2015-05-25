@@ -68,7 +68,7 @@ function init() {
     var dd = createDataDictionary(bets, keys);
     console.log(dd)
 
-    dccrossfilterviz(data, keys)
+    dccrossfilterviz(data, dd, '.dccrossfilterviz')
   })
 }
 
