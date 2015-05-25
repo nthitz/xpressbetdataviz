@@ -16,7 +16,7 @@ function and(a,b) {
 * @param {function} b - the second function to call..
 * @return {function} a function that returns a() || b(). a & b are called with the same arguments as passed to this returned function.
 */
-function and(a,b) {
+function or(a,b) {
   return function() {
     return a.apply(this,arguments) || b.apply(this, arguments)
   }
