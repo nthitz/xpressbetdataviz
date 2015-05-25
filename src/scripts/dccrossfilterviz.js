@@ -27,6 +27,11 @@ function viz(_dataArray, dataDictionary, _selector) {
   cf.typeOfBetVolumeGroup = cf.typeOfBet.group()
   cf.typeOfBetWinAmountGroup = cf.typeOfBet.group()
     .reduceSum(_.property(keys.winAmount.key))
+  cf.typeOfBetWagerAmountGroup = cf.typeOfBet.group()
+    .reduceSum(_.property(keys.cost.key))
+  cf.typeOfBetCreditAmountGroup = cf.typeOfBet.group()
+    .reduceSum(_.property(keys.payout.key))
+
 
 
   window.bv = cf.betVolumneByDayGroup
@@ -35,16 +40,21 @@ function viz(_dataArray, dataDictionary, _selector) {
 
   d3.select(selector).append('div').attr('class','typeOfBetChart')
   d3.select(selector).append('div').attr('class','typeOfBetChartWinAmount')
+  d3.select(selector).append('div').attr('class','typeOfBetChartWagerAmount')
+  d3.select(selector).append('div').attr('class','typeOfBetChartCreditAmount')
   d3.select(selector).append('div').attr('class','lineChart')
   d3.select(selector).append('div').attr('class','volumeChart')
 
   charts.typeOfBetChart = dc.rowChart('.typeOfBetChart')
   charts.typeOfBetChartWinAmount = dc.rowChart('.typeOfBetChartWinAmount')
+  charts.typeOfBetChartWagerAmount = dc.rowChart('.typeOfBetChartWagerAmount')
+  charts.typeOfBetChartCreditAmount = dc.rowChart('.typeOfBetChartCreditAmount')
+
   charts.volumeChart = dc.barChart('.volumeChart')
   charts.moneyLineChart =  dc.lineChart('.lineChart')
 
   charts.typeOfBetChart
-    .width(400)
+    .width(200)
     .height(400)
     .margins({top: 20, left: 10, right: 10, bottom: 20})
     .group(cf.typeOfBetVolumeGroup)
@@ -60,10 +70,41 @@ function viz(_dataArray, dataDictionary, _selector) {
     .xAxis().ticks(4);
 
   charts.typeOfBetChartWinAmount
-    .width(400)
+    .width(200)
     .height(400)
     .margins({top: 20, left: 10, right: 10, bottom: 20})
     .group(cf.typeOfBetWinAmountGroup)
+    .dimension(cf.typeOfBet)
+    .ordinalColors(['#3182bd', '#6baed6', '#9ecae1', '#c6dbef', '#dadaeb'])
+    .label(function (d) {
+      return d.key
+    })
+    .title(function (d) {
+      return d.value;
+    })
+    .elasticX(true)
+    .xAxis().ticks(4);
+  charts.typeOfBetChartWagerAmount
+    .width(200)
+    .height(400)
+    .margins({top: 20, left: 10, right: 10, bottom: 20})
+    .group(cf.typeOfBetWagerAmountGroup)
+    .dimension(cf.typeOfBet)
+    .ordinalColors(['#3182bd', '#6baed6', '#9ecae1', '#c6dbef', '#dadaeb'])
+    .label(function (d) {
+      return d.key
+    })
+    .title(function (d) {
+      return d.value;
+    })
+    .elasticX(true)
+    .xAxis().ticks(4);
+
+  charts.typeOfBetChartCreditAmount
+    .width(200)
+    .height(400)
+    .margins({top: 20, left: 10, right: 10, bottom: 20})
+    .group(cf.typeOfBetCreditAmountGroup)
     .dimension(cf.typeOfBet)
     .ordinalColors(['#3182bd', '#6baed6', '#9ecae1', '#c6dbef', '#dadaeb'])
     .label(function (d) {
